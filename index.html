@@ -9,6 +9,7 @@
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; touch-action: manipulation; }
+        
         body {
             height: 100vh;
             display: flex;
@@ -16,10 +17,10 @@
             align-items: center;
             background: radial-gradient(circle at center, #1b2735 0%, #090a0f 100%);
             font-family: 'Poppins', sans-serif;
-            color: white;
             overflow: hidden;
         }
 
+        /* TAM SİMETRİK KONTROLÜ */
         .glass-card {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(15px);
@@ -27,47 +28,54 @@
             padding: 2.5rem 1.5rem;
             border-radius: 35px;
             box-shadow: 0 10px 50px rgba(0,0,0,0.5);
-            max-width: 380px; /* Genişliği biraz daraltıp ortalamayı garantiledik */
-            width: 90%;
+            
+            /* Mobilde tam ortalama için kritik ayarlar */
+            width: 88%;
+            max-width: 360px;
+            margin: auto;
+            
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: center; /* Yatayda her şeyi ortalar */
             text-align: center;
         }
 
         .gif-display {
-            width: 160px;
-            height: 160px;
+            width: 150px;
+            height: 150px;
             margin-bottom: 20px;
             border-radius: 20px;
             object-fit: contain;
+            display: block;
         }
 
         h1 {
-            font-size: 1.4rem;
+            color: white;
+            font-size: 1.35rem;
             margin-bottom: 1.5rem;
             line-height: 1.4;
-            min-height: 4.5rem;
             width: 100%;
+            min-height: 4.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
+        /* BUTON GRUBU SİMETRİSİ */
         .button-group {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             width: 100%;
-            min-height: 60px;
+            padding: 0 5px;
         }
 
-        /* Butonların yok olmasını veya küçülmesini engelleyen kesin kurallar */
         button {
-            width: 120px !important;
-            height: 50px !important;
-            font-size: 1.05rem;
+            flex: 1; /* Butonların genişliğini tam eşit yapar */
+            height: 50px;
+            max-width: 130px;
+            font-size: 1rem;
             border: none;
             border-radius: 50px;
             cursor: pointer;
@@ -75,7 +83,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: 0.2s;
         }
 
         #yes-btn {
@@ -86,15 +94,21 @@
         #no-btn {
             background: #ff4b2b;
             color: white;
-            z-index: 999; /* Her zaman en üstte görünsün */
+            position: relative;
         }
 
-        /* Dilek Kutusu - Hiçbir şey silinmedi */
+        /* DİLEK BÖLÜMÜ (Screenshot_20260313-205322_Chrome.jpg referansıyla) */
         .wish-section {
-            margin-top: 20px;
             width: 100%;
+            margin-top: 15px;
             display: none;
-            animation: fadeIn 1s forwards;
+            animation: fadeIn 0.8s forwards;
+        }
+
+        .personal-text {
+            color: white;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
         }
 
         textarea {
@@ -106,19 +120,27 @@
             color: white;
             font-family: inherit;
             resize: none;
-            margin: 15px 0 10px;
+            margin-bottom: 15px;
             outline: none;
+            text-align: center;
         }
 
         .send-btn {
             background: #ffde59;
             color: #000;
-            width: 100% !important; /* Form içindeki buton tam genişlik */
+            width: 100% !important;
+            max-width: none !important;
         }
 
-        #status-msg { font-size: 0.85rem; color: #00ff87; display: none; margin-top: 10px; font-weight: bold; }
-        
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        #status-msg { 
+            font-size: 0.85rem; 
+            color: #00ff87; 
+            display: none; 
+            margin-top: 10px; 
+            font-weight: bold; 
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
@@ -137,17 +159,14 @@
     <div id="celebration-screen" style="display: none;">
         <div class="glass-card">
             <img class="gif-display" src="https://i.ibb.co/9mttxWVJ/a4e25709-0c40-4394-bb89-28c8cfe3c3d7.gif">
-            <h1 style="font-size: 1.5rem; margin-bottom: 0.5rem; min-height: auto;">İyi ki doğdun Zeynep! 🥳</h1>
-            <p style="font-size: 0.95rem;">Yeni yaşın sana tüm güzellikleri getirsin.</p>
-
+            <h1 style="min-height: auto; margin-bottom: 10px;">İyi ki doğdun Zeynep!İyiki varsın 🎉</h1>
+            
             <div class="wish-section" id="wish-area">
-                <p style="color: #ffde59; font-weight: bold;">✨ Bir dilek tut...</p>
-                
+                <p class="personal-text">Yeni yaşın sana tüm güzellikleri getirsin.</p>
                 <form id="wish-form" action="https://formspree.io/f/mbdzkdpr" method="POST">
-                    <textarea name="dilek" rows="3" placeholder="Kalbinden geçen o dileği buraya yaz..." required></textarea>
+                    <textarea name="Zeynep_Dilegi" rows="3" placeholder="Bir dilek tut ve buraya yaz..." required></textarea>
                     <button type="submit" class="send-btn" id="submit-btn">Yıldızlara Gönder 🌠</button>
                 </form>
-                
                 <p id="status-msg">Dileğin evrene gönderildi! ✨</p>
             </div>
         </div>
@@ -159,17 +178,13 @@
             const mainGif = document.getElementById('main-gif');
             const headerText = document.getElementById('header-text');
 
-            // İstediğin metin değişikliği
-            headerText.innerHTML = "direk şimdi basta gorelim yazsin";
-            
-            // GIF değişikliği
+            headerText.innerHTML = "şimdi basta görelim";
             mainGif.src = "https://i.ibb.co/TMqM7wgh/Cute-Gif-G-F-Cute-Gif-Angry-Cat-discover-and-share-G-Fs.gif";
             
-            // Kaçma - Sabit boyutları koruyarak
             noBtn.style.position = "fixed";
-            const padding = 100;
-            const x = Math.random() * (window.innerWidth - 120 - padding) + padding/2;
-            const y = Math.random() * (window.innerHeight - 50 - padding) + padding/2;
+            const p = 100;
+            const x = Math.random() * (window.innerWidth - 130 - p) + p/2;
+            const y = Math.random() * (window.innerHeight - 50 - p) + p/2;
             
             noBtn.style.left = x + "px";
             noBtn.style.top = y + "px";
@@ -180,8 +195,7 @@
             document.getElementById('celebration-screen').style.display = "flex";
             document.getElementById('wish-area').style.display = "block";
             
-            var duration = 8 * 1000;
-            var end = Date.now() + duration;
+            var end = Date.now() + (7 * 1000);
             (function frame() {
                 confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 } });
                 confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 } });
@@ -189,7 +203,6 @@
             }());
         }
 
-        // Formspree Entegrasyonu - Dokunulmadı
         const form = document.getElementById("wish-form");
         form.addEventListener("submit", async function(e) {
             e.preventDefault();
@@ -197,18 +210,15 @@
             const status = document.getElementById("status-msg");
             btn.innerText = "Gönderiliyor...";
             
-            const data = new FormData(e.target);
             fetch(e.target.action, {
                 method: 'POST',
-                body: data,
+                body: new FormData(e.target),
                 headers: { 'Accept': 'application/json' }
             }).then(response => {
                 if (response.ok) {
                     status.style.display = "block";
                     form.style.display = "none";
                     confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-                } else {
-                    btn.innerText = "Tekrar Dene";
                 }
             });
         });
