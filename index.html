@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>İyi Ki Doğdun Zeynep! 🥳</title>
+    <title>İyi Ki Doğdun Zeynep!</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     
@@ -24,59 +24,54 @@
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 2.5rem 1.5rem;
+            padding: 2rem 1.5rem;
             border-radius: 35px;
             box-shadow: 0 10px 50px rgba(0,0,0,0.5);
-            max-width: 420px;
-            width: 88%;
-            text-align: center; /* İÇERİĞİ ORTALAR */
-            z-index: 100;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
             display: flex;
             flex-direction: column;
-            align-items: center; /* İÇERİĞİ DİKEYDE ORTALAR */
-            justify-content: center; /* İÇERİĞİ YATAYDA ORTALAR */
+            align-items: center;
         }
 
-        /* GIF'i ortalamak ve boyutu korumak */
         .gif-display {
-            width: 160px;
-            height: 160px;
+            width: 150px;
+            height: 150px;
             margin-bottom: 20px;
             border-radius: 20px;
-            display: block;
             object-fit: contain;
-            /* Flex ile ortalamaya gerek yok, parent'tan ortalanıyor */
-        }
-        
-        /* Başlıkları ortalamak */
-        h1 {
-            font-size: 1.6rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.3;
-            width: 100%;
-            text-align: center;
         }
 
-        /* Butonları ortalamak ve simetrik yapmak */
+        h1 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+            min-height: 4rem; /* Metin değişince kartın zıplamasını engeller */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         .button-group {
             display: flex;
-            justify-content: center; /* YATAYDA ORTALAR */
+            justify-content: center;
             align-items: center;
-            gap: 20px;
-            margin-top: 20px;
-            min-height: 60px;
+            gap: 15px; /* Butonlar arası boşluk */
             width: 100%;
+            margin-top: 10px;
         }
 
         button {
-            padding: 12px 28px;
+            flex: 1; /* Butonların genişliğini tam olarak eşitler */
+            max-width: 130px; /* Çok yayılmasınlar */
+            padding: 12px 0;
             font-size: 1.05rem;
             border: none;
             border-radius: 50px;
             cursor: pointer;
             font-weight: bold;
             transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            min-width: 110px; /* Buton genişliklerini eşitlemek için */
         }
 
         #yes-btn {
@@ -90,83 +85,46 @@
             position: relative;
         }
 
-        /* Dilek Bölümü Tasarımı - TAM ORTALANMIŞ */
+        /* Dilek Bölümü */
         .wish-section {
-            margin-top: 25px;
+            margin-top: 20px;
             width: 100%;
-            display: none; /* İlk aşamada gizli */
+            display: none;
             animation: fadeIn 1s forwards;
-            flex-direction: column;
-            align-items: center; /* İÇERİĞİ ORTALAR */
-        }
-
-        .personal-msg {
-            font-size: 1.05rem;
-            margin-bottom: 10px;
-            text-align: center;
-            line-height: 1.4;
         }
 
         textarea {
             width: 100%;
-            padding: 14px;
-            border-radius: 18px;
-            border: 1px solid rgba(255, 255, 255, 0.25);
+            padding: 12px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             background: rgba(255, 255, 255, 0.1);
             color: white;
             font-family: inherit;
             resize: none;
-            margin: 15px 0;
+            margin: 15px 0 10px;
             outline: none;
-            transition: 0.3s;
-            text-align: left; /* Yazı soldan başlasın */
         }
 
-        textarea:focus {
-            border-color: rgba(0, 212, 255, 0.5);
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        /* Gönder butonunu ortalamak */
         .send-btn {
             background: #ffde59;
             color: #000;
             width: 100%;
-            box-shadow: 0 5px 15px rgba(255, 222, 89, 0.3);
-            margin-top: 10px;
-        }
-        
-        #status-msg {
-            font-size: 0.9rem;
-            color: #00ff87;
-            display: none;
-            margin-top: 15px;
-            font-weight: bold;
-            text-align: center;
+            max-width: none;
         }
 
-        .footer-note {
-            font-size: 0.75rem;
-            opacity: 0.7;
-            margin-top: 8px;
-            font-style: italic;
-            text-align: center;
-        }
+        #status-msg { font-size: 0.85rem; color: #00ff87; display: none; margin-top: 10px; font-weight: bold; }
+        .footer-note { font-size: 0.7rem; opacity: 0.7; margin-top: 5px; font-style: italic; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
     <div id="question-screen">
         <div class="glass-card">
-            <img id="main-gif" class="gif-display" src="https://i.ibb.co/5hFyFJ9v/Dudu-Cute-Sticker-Dudu-Cute-Smile-Descubre-y-comparte-G-F.gif" alt="Gizemli Sürpriz">
-            
+            <img id="main-gif" class="gif-display" src="https://i.ibb.co/5hFyFJ9v/Dudu-Cute-Sticker-Dudu-Cute-Smile-Descubre-y-comparte-G-F.gif">
             <h1 id="header-text">İyi ki doğdun! 🎂<br>Bu küçük sürprizi kabul eder misin?</h1>
-            
             <div class="button-group">
                 <button id="yes-btn" onclick="acceptGift()">Evet!</button>
                 <button id="no-btn" onmouseover="moveButton()" ontouchstart="moveButton()">Hayır</button>
@@ -176,17 +134,16 @@
 
     <div id="celebration-screen" style="display: none;">
         <div class="glass-card">
-            <img class="gif-display" src="https://i.ibb.co/9mttxWVJ/a4e25709-0c40-4394-bb89-28c8cfe3c3d7.gif" alt="Kutlama Zamanı">
-            
-            <h1 class="celebration-title" style="font-size: 1.8rem; background: linear-gradient(45deg, #ff00ea, #00d4ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.8rem;">İyi ki doğdun Zeynep! 🎉</h1>
-            
-            <div class="wish-section" id="wish-area" style="display: flex;">
-                <p class="personal-msg">Yeni yaşın sana tüm güzellikleri getirsin.</p>
-                <p style="color: #ffde59; font-weight: bold; font-size: 1.1rem; margin-top: 10px;">✨ Bir dilek tut...</p>
+            <img class="gif-display" src="https://i.ibb.co/9mttxWVJ/a4e25709-0c40-4394-bb89-28c8cfe3c3d7.gif">
+            <h1 style="font-size: 1.5rem; margin-bottom: 0.5rem; min-height: auto;">İyi ki doğdun Zeynep! 🥳</h1>
+            <p style="font-size: 0.95rem;">Yeni yaşın sana tüm güzellikleri getirsin.</p>
+
+            <div class="wish-section" id="wish-area">
+                <p style="color: #ffde59; font-weight: bold;">✨ Bir dilek tut...</p>
                 <p class="footer-note">Bu dilek sadece bu anın içinde saklı kalacak.</p>
                 
-                <form id="wish-form" action="https://formspree.io/f/mbdzkdpr" method="POST" style="width: 100%;">
-                    <textarea name="Zeynep_Dilegi" rows="3" placeholder="Kalbinden geçen o dileği buraya yaz..." required></textarea>
+                <form id="wish-form" action="https://formspree.io/f/mbdzkdpr" method="POST">
+                    <textarea name="dilek" rows="3" placeholder="Kalbinden geçen o dileği buraya yaz..." required></textarea>
                     <button type="submit" class="send-btn" id="submit-btn">Yıldızlara Gönder 🌠</button>
                 </form>
                 
@@ -199,10 +156,15 @@
         function moveButton() {
             const noBtn = document.getElementById('no-btn');
             const mainGif = document.getElementById('main-gif');
+            const headerText = document.getElementById('header-text');
+
+            // İstediğin metin değişikliği
+            headerText.innerHTML = "direk şimdi basta gorelim yazsin";
             
-            // image_2.png (Sinirli Kedi)
+            // GIF değişikliği
             mainGif.src = "https://i.ibb.co/TMqM7wgh/Cute-Gif-G-F-Cute-Gif-Angry-Cat-discover-and-share-G-Fs.gif";
             
+            // Buton kaçırma
             noBtn.style.position = "fixed";
             const p = 80;
             const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - p) + p/2;
@@ -213,37 +175,24 @@
 
         function acceptGift() {
             document.getElementById('question-screen').style.display = "none";
-            document.getElementById('celebration-screen').style.display = "flex"; /* Flex ile ortalamayı korur */
+            document.getElementById('celebration-screen').style.display = "flex";
+            document.getElementById('wish-area').style.display = "block";
             
-            // Konfeti fırtınası
-            var end = Date.now() + (10 * 1000);
+            var duration = 8 * 1000;
+            var end = Date.now() + duration;
             (function frame() {
-                confetti({
-                    particleCount: 5,
-                    angle: 60,
-                    spread: 65,
-                    origin: { x: 0 },
-                    colors: ['#00d4ff', '#ff00ea', '#ffffff']
-                });
-                confetti({
-                    particleCount: 5,
-                    angle: 120,
-                    spread: 65,
-                    origin: { x: 1 },
-                    colors: ['#00d4ff', '#ff00ea', '#ffffff']
-                });
-                if (Date.now() < end) { requestAnimationFrame(frame); }
+                confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 } });
+                confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 } });
+                if (Date.now() < end) requestAnimationFrame(frame);
             }());
         }
 
-        // Formspree ile sessizce mail gönderme (Seni ele vermeyen mekanizma)
         const form = document.getElementById("wish-form");
         form.addEventListener("submit", async function(e) {
             e.preventDefault();
             const btn = document.getElementById("submit-btn");
             const status = document.getElementById("status-msg");
             btn.innerText = "Gönderiliyor...";
-            btn.disabled = true; // Tekrar basılmasını engeller
             
             const data = new FormData(e.target);
             fetch(e.target.action, {
@@ -254,12 +203,9 @@
                 if (response.ok) {
                     status.style.display = "block";
                     form.style.display = "none";
-                    // Dilek gittiğinde ek bir konfeti patlat (final dokunuş)
-                    confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+                    confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
                 } else {
-                    btn.innerText = "Yıldızlara Gönder 🌠";
-                    btn.disabled = false;
-                    alert("Bir sorun oluştu. Lütfen tekrar dene.");
+                    btn.innerText = "Tekrar Dene";
                 }
             });
         });
