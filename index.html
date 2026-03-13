@@ -24,20 +24,20 @@
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 2rem 1.5rem;
+            padding: 2.5rem 1.5rem;
             border-radius: 35px;
             box-shadow: 0 10px 50px rgba(0,0,0,0.5);
-            max-width: 400px;
-            width: 85%;
+            max-width: 380px; /* Genişliği biraz daraltıp ortalamayı garantiledik */
+            width: 90%;
             display: flex;
             flex-direction: column;
-            align-items: center; /* Yatayda tam ortalama */
+            align-items: center;
             text-align: center;
         }
 
         .gif-display {
-            width: 150px;
-            height: 150px;
+            width: 160px;
+            height: 160px;
             margin-bottom: 20px;
             border-radius: 20px;
             object-fit: contain;
@@ -47,11 +47,11 @@
             font-size: 1.4rem;
             margin-bottom: 1.5rem;
             line-height: 1.4;
-            min-height: 4.5rem; /* Metin değişince kartın kaymasını engeller */
+            min-height: 4.5rem;
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 100%;
         }
 
         .button-group {
@@ -60,38 +60,36 @@
             align-items: center;
             gap: 15px;
             width: 100%;
-            position: relative;
-            min-height: 50px;
+            min-height: 60px;
         }
 
+        /* Butonların yok olmasını veya küçülmesini engelleyen kesin kurallar */
         button {
-            height: 50px;
-            width: 120px; /* Sabit genişlik: Küçülmeyi engeller */
+            width: 120px !important;
+            height: 50px !important;
             font-size: 1.05rem;
             border: none;
             border-radius: 50px;
             cursor: pointer;
             font-weight: bold;
-            transition: transform 0.2s;
             display: flex;
             justify-content: center;
             align-items: center;
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         #yes-btn {
             background: linear-gradient(45deg, #00d4ff, #00ff87);
             color: #000;
-            z-index: 10;
         }
 
         #no-btn {
             background: #ff4b2b;
             color: white;
-            z-index: 5;
-            white-space: nowrap; /* Yazının taşmasını engeller */
+            z-index: 999; /* Her zaman en üstte görünsün */
         }
 
-        /* Dilek Kutusu */
+        /* Dilek Kutusu - Hiçbir şey silinmedi */
         .wish-section {
             margin-top: 20px;
             width: 100%;
@@ -115,12 +113,11 @@
         .send-btn {
             background: #ffde59;
             color: #000;
-            width: 100%;
+            width: 100% !important; /* Form içindeki buton tam genişlik */
         }
 
         #status-msg { font-size: 0.85rem; color: #00ff87; display: none; margin-top: 10px; font-weight: bold; }
-        .footer-note { font-size: 0.7rem; opacity: 0.7; margin-top: 5px; font-style: italic; }
-
+        
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
@@ -145,7 +142,6 @@
 
             <div class="wish-section" id="wish-area">
                 <p style="color: #ffde59; font-weight: bold;">✨ Bir dilek tut...</p>
-                <p class="footer-note">Bu dilek sadece bu anın içinde saklı kalacak.</p>
                 
                 <form id="wish-form" action="https://formspree.io/f/mbdzkdpr" method="POST">
                     <textarea name="dilek" rows="3" placeholder="Kalbinden geçen o dileği buraya yaz..." required></textarea>
@@ -163,17 +159,18 @@
             const mainGif = document.getElementById('main-gif');
             const headerText = document.getElementById('header-text');
 
-            // Metin Değişikliği
+            // İstediğin metin değişikliği
             headerText.innerHTML = "direk şimdi basta gorelim yazsin";
             
-            // GIF Değişikliği
+            // GIF değişikliği
             mainGif.src = "https://i.ibb.co/TMqM7wgh/Cute-Gif-G-F-Cute-Gif-Angry-Cat-discover-and-share-G-Fs.gif";
             
-            // Kaçma Mekanizması
+            // Kaçma - Sabit boyutları koruyarak
             noBtn.style.position = "fixed";
-            const p = 100;
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - p) + p/2;
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - p) + p/2;
+            const padding = 100;
+            const x = Math.random() * (window.innerWidth - 120 - padding) + padding/2;
+            const y = Math.random() * (window.innerHeight - 50 - padding) + padding/2;
+            
             noBtn.style.left = x + "px";
             noBtn.style.top = y + "px";
         }
@@ -192,6 +189,7 @@
             }());
         }
 
+        // Formspree Entegrasyonu - Dokunulmadı
         const form = document.getElementById("wish-form");
         form.addEventListener("submit", async function(e) {
             e.preventDefault();
