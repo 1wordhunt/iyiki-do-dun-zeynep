@@ -14,7 +14,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(to bottom, #24243e, #302b63, #0f0c29);
+            background: radial-gradient(circle at center, #1b2735 0%, #090a0f 100%);
             font-family: 'Poppins', sans-serif;
             color: white;
             overflow: hidden;
@@ -28,86 +28,70 @@
             border-radius: 30px;
             box-shadow: 0 10px 50px rgba(0,0,0,0.5);
             max-width: 400px;
-            width: 90%;
+            width: 85%;
             text-align: center;
             z-index: 100;
         }
 
-        .gif-display {
-            width: 180px;
-            height: 180px;
-            margin: 0 auto 15px;
-            border-radius: 20px;
-            display: block;
-            object-fit: contain;
-        }
+        .gif-display { width: 150px; height: 150px; margin: 0 auto 15px; border-radius: 20px; display: block; object-fit: contain; }
+        
+        .button-group { display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 20px; min-height: 60px; }
 
-        h1 { font-size: 1.5rem; margin-bottom: 1.5rem; line-height: 1.3; }
-
-        .button-group {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            margin-top: 20px;
-            min-height: 60px;
-        }
-
-        button {
-            padding: 12px 30px;
-            font-size: 1.1rem;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.2s;
-        }
-
+        button { padding: 12px 25px; font-size: 1rem; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; transition: 0.3s; }
         #yes-btn { background: linear-gradient(45deg, #00d4ff, #00ff87); color: #000; }
-        #no-btn { background: #ff4b2b; color: white; position: relative; z-index: 1000; }
+        #no-btn { background: #ff4b2b; color: white; position: relative; }
 
-        .celebration-title {
-            font-size: 1.8rem;
-            background: linear-gradient(45deg, #ff00ea, #00d4ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 1rem;
+        .wish-section { margin-top: 25px; display: none; animation: fadeIn 1s forwards; }
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-family: inherit;
+            resize: none;
+            margin: 15px 0 10px;
+            outline: none;
         }
+        .send-btn { background: #ffde59; color: #000; width: 100%; box-shadow: 0 4px 15px rgba(255, 222, 89, 0.3); }
+        
+        #status-msg { font-size: 0.85rem; color: #00ff87; display: none; margin-top: 10px; font-weight: bold; }
+        .footer-note { font-size: 0.7rem; opacity: 0.7; margin-top: 5px; font-style: italic; }
 
-        #troll-text {
-            color: #ffde59;
-            margin-top: 15px;
-            font-weight: bold;
-            display: none;
-            animation: fadeIn 0.3s;
-        }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
     <div id="question-screen">
         <div class="glass-card">
-            <img id="main-gif" class="gif-display" src="https://i.ibb.co/5hFyFJ9v/Dudu-Cute-Sticker-Dudu-Cute-Smile-Descubre-y-comparte-G-F.gif" alt="Giriş GIF">
-            
-            <h1 id="header-text">İyi ki doğdun! 🎂<br>Bu hediyeyi kabul ediyor musun?</h1>
-            
+            <img id="main-gif" class="gif-display" src="https://i.ibb.co/5hFyFJ9v/Dudu-Cute-Sticker-Dudu-Cute-Smile-Descubre-y-comparte-G-F.gif">
+            <h1>İyi ki doğdun! 🎂<br>Bu sürprizi kabul ediyor musun?</h1>
             <div class="button-group">
                 <button id="yes-btn" onclick="acceptGift()">Evet</button>
                 <button id="no-btn" onmouseover="moveButton()" ontouchstart="moveButton()">Hayır</button>
             </div>
-            <p id="troll-text">Şimdi başka görelim! 😎</p>
         </div>
     </div>
 
     <div id="celebration-screen" style="display: none;">
         <div class="glass-card">
-            <img class="gif-display" src="https://i.ibb.co/9mttxWVJ/a4e25709-0c40-4394-bb89-28c8cfe3c3d7.gif" alt="Kutlama GIF">
-            
-            <h1 class="celebration-title">Kabul edeceğini biliyordum! ❤️</h1>
-            <h2>İyi ki doğdun Zeynep, iyi ki varsın! 🥳</h2>
-            <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8;">Her günün böyle mutlu geçsin!</p>
+            <img class="gif-display" src="https://i.ibb.co/9mttxWVJ/a4e25709-0c40-4394-bb89-28c8cfe3c3d7.gif">
+            <h1 style="font-size: 1.5rem; margin-bottom: 0.5rem;">İyi ki doğdun Zeynep! 🥳</h1>
+            <p style="font-size: 0.95rem;">Yeni yaşın sana tüm güzellikleri getirsin.</p>
+
+            <div class="wish-section" id="wish-area">
+                <p style="color: #ffde59; font-weight: bold;">✨ Bir dilek tut...</p>
+                <p class="footer-note">Bu dilek sadece bu anın içinde saklı kalacak.</p>
+                
+                <form id="wish-form" action="https://formspree.io/f/mbdzkdpr" method="POST">
+                    <textarea name="Zeynep_Dilegi" rows="3" placeholder="Kalbinden geçen o dileği buraya yaz..." required></textarea>
+                    <button type="submit" class="send-btn" id="submit-btn">Yıldızlara Gönder 🌠</button>
+                </form>
+                
+                <p id="status-msg">Dileğin evrene gönderildi! ✨</p>
+            </div>
         </div>
     </div>
 
@@ -115,20 +99,11 @@
         function moveButton() {
             const noBtn = document.getElementById('no-btn');
             const mainGif = document.getElementById('main-gif');
-            const trollText = document.getElementById('troll-text');
-
-            // GIF'i sinirli kediyle değiştir
             mainGif.src = "https://i.ibb.co/TMqM7wgh/Cute-Gif-G-F-Cute-Gif-Angry-Cat-discover-and-share-G-Fs.gif";
-            
-            // "Şimdi başka görelim" yazısını çıkar
-            trollText.style.display = "block";
-
-            // Butonu rastgele konuma ışınla
             noBtn.style.position = "fixed";
-            const padding = 80;
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding) + (padding/2);
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding) + (padding/2);
-            
+            const p = 80;
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - p) + p/2;
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - p) + p/2;
             noBtn.style.left = x + "px";
             noBtn.style.top = y + "px";
         }
@@ -136,32 +111,39 @@
         function acceptGift() {
             document.getElementById('question-screen').style.display = "none";
             document.getElementById('celebration-screen').style.display = "block";
+            document.getElementById('wish-area').style.display = "block";
             
-            // Konfeti fırtınası
-            var duration = 15 * 1000;
+            var duration = 8 * 1000;
             var end = Date.now() + duration;
-
             (function frame() {
-                confetti({
-                    particleCount: 4,
-                    angle: 60,
-                    spread: 55,
-                    origin: { x: 0 },
-                    colors: ['#ff00ea', '#00d4ff', '#ffffff']
-                });
-                confetti({
-                    particleCount: 4,
-                    angle: 120,
-                    spread: 55,
-                    origin: { x: 1 },
-                    colors: ['#ff00ea', '#00d4ff', '#ffffff']
-                });
-
-                if (Date.now() < end) {
-                    requestAnimationFrame(frame);
-                }
+                confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 } });
+                confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 } });
+                if (Date.now() < end) requestAnimationFrame(frame);
             }());
         }
+
+        const form = document.getElementById("wish-form");
+        form.addEventListener("submit", async function(e) {
+            e.preventDefault();
+            const btn = document.getElementById("submit-btn");
+            const status = document.getElementById("status-msg");
+            btn.innerText = "Gönderiliyor...";
+            
+            const data = new FormData(e.target);
+            fetch(e.target.action, {
+                method: 'POST',
+                body: data,
+                headers: { 'Accept': 'application/json' }
+            }).then(response => {
+                if (response.ok) {
+                    status.style.display = "block";
+                    form.style.display = "none";
+                    confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+                } else {
+                    btn.innerText = "Tekrar Dene";
+                }
+            });
+        });
     </script>
 </body>
 </html>
